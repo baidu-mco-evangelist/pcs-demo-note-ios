@@ -1,4 +1,4 @@
 pcs-demo-note-ios
 =================
 
-This is a note demo source code for Baidu PCS
+This is a sample note source code for Baidu PCS
