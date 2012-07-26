@@ -7,12 +7,15 @@
 //
 
 #import "NotesListViewController.h"
+#import "SBJson.h"
 
 @interface NotesListViewController ()
 
 @end
 
 @implementation NotesListViewController
+
+@synthesize fileListJson;
 
 - (IBAction)refreshNotesList:(id)sender
 {
@@ -42,6 +45,24 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // Get array based on fileListJson
+    NSLog(@"%@", fileListJson);
+    
+    SBJsonParser *parser = [[SBJsonParser alloc] init];
+    NSDictionary *fileListDict = [parser objectWithString:fileListJson error:nil];
+    NSString *fileInfoJson = [fileListDict objectForKey:@"path"];
+    NSLog(@"%@", fileInfoJson);
+    
+    
+
+    //NSDictionary *fileArray = [parser objectWithString:fileInfoJson error:nil];
+    //NSLog(@"%@", fileArray);
+    /*
+    for (NSDictionary *file in fileArray)  {
+        NSLog(@"Hello World");
+    }
+    */
 }
 
 - (void)viewDidUnload

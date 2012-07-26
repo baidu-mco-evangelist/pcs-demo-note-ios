@@ -10,6 +10,7 @@
 
 @interface NotesListViewController : UITableViewController
 
+@property (nonatomic, strong) NSString *fileListJson;
 
 - (IBAction)refreshNotesList:(id)sender;
 - (IBAction)newNote:(id)sender;
