@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NotesListViewController : UITableViewController
+@interface NotesListViewController : UITableViewController 
 
 @property (nonatomic, strong) NSString *fileListJson;
 

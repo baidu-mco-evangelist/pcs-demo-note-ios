@@ -14,7 +14,7 @@
 
 #define API_KEY @"48FTB4PjV71jlCifBllSe50W"
 
-static NSString *accessToken;
+NSString *accessToken;
 
 
 @interface ViewController () <BaiduOAuthDelegate>{
@@ -27,6 +27,7 @@ static NSString *accessToken;
 @implementation ViewController
 
 
+/*
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
@@ -39,12 +40,15 @@ static NSString *accessToken;
         [[segue destinationViewController] setFileListJson:fileListJson];
     }
 }
+ */
 
 // Successfully get token
 -(void)onComplete:(NSString*)token
 {
     NSLog(@"Complete");
     accessToken = token;
+    
+    // Save access_token locally
     
     // Fetch Data Show in Table View
     
@@ -53,41 +57,10 @@ static NSString *accessToken;
     baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@", token, @"info"];
     */
      
-    NSString *baseUrl = @"https://pcs.baidu.com/rest/2.0/pcs/file?";
-    baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@&path=/apps/云端记事本", token, @"list"];
-    baseUrl = [baseUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+       
+    NSLog(@"perform segue");
+    [self performSegueWithIdentifier: @"showListTable" sender: self];
 
-    //NSLog(@"url= %@", baseUrl);
-    
-    NSURL *url = [NSURL URLWithString:baseUrl];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    [request setHTTPMethod:@"GET"];
-    
-
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-        
-        if ([data length] > 0 && error == nil) 
-        {
-            fileListJson = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-            
-        } else if ([data length] ==0 && error == nil) {
-            NSLog(@"No Data");
-        } else if  (error) {
-            NSLog(@"ends with error");
-            NSLog(@"%@", error);
-        }
-        
-        NSLog(@"perform segue");
-        [self performSegueWithIdentifier: @"showListTable" sender: self];
-
-    }];
-    
-    
-    
-    
-    
     
     // TODO: Find usage of presentViewController
     /*
@@ -128,8 +101,7 @@ static NSString *accessToken;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    
+        
     // Check Acount Availability
     if ([self baiduAccessTokenAvailable]) {
         

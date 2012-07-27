@@ -22,6 +22,7 @@
 		E27EE1CB15BE33CC00C9E4C2 /* NoteContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E27EE1CA15BE33CC00C9E4C2 /* NoteContentViewController.m */; };
 		E29DE97615C00C0500E138FF /* NotesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E29DE97515C00C0500E138FF /* NotesListViewController.m */; };
 		E29DE97A15C00D8900E138FF /* BaiduOAuthSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = E29DE97915C00D8900E138FF /* BaiduOAuthSdk.m */; };
+		E2C9649115C2956500353525 /* FileListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C9649015C2956500353525 /* FileListCell.m */; };
 		E2E2541815BE2469007E16B5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E2541715BE2469007E16B5 /* UIKit.framework */; };
 		E2E2541A15BE2469007E16B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E2541915BE2469007E16B5 /* Foundation.framework */; };
 		E2E2541C15BE2469007E16B5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E2541B15BE2469007E16B5 /* CoreGraphics.framework */; };
@@ -67,6 +68,8 @@
 		E29DE97515C00C0500E138FF /* NotesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesListViewController.m; sourceTree = "<group>"; };
 		E29DE97815C00D8900E138FF /* BaiduOAuthSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduOAuthSdk.h; sourceTree = "<group>"; };
 		E29DE97915C00D8900E138FF /* BaiduOAuthSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduOAuthSdk.m; sourceTree = "<group>"; };
+		E2C9648F15C2956500353525 /* FileListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileListCell.h; sourceTree = "<group>"; };
+		E2C9649015C2956500353525 /* FileListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileListCell.m; sourceTree = "<group>"; };
 		E2E2541315BE2469007E16B5 /* PCSNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E2541715BE2469007E16B5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E2E2541915BE2469007E16B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -182,6 +185,8 @@
 				E27EE1CA15BE33CC00C9E4C2 /* NoteContentViewController.m */,
 				E29DE97415C00C0500E138FF /* NotesListViewController.h */,
 				E29DE97515C00C0500E138FF /* NotesListViewController.m */,
+				E2C9648F15C2956500353525 /* FileListCell.h */,
+				E2C9649015C2956500353525 /* FileListCell.m */,
 				E2E2541E15BE2469007E16B5 /* Supporting Files */,
 			);
 			path = PCSNote;
@@ -284,6 +289,7 @@
 				E24FA33815C1B1520096F345 /* SBJsonTokeniser.m in Sources */,
 				E24FA33915C1B1520096F345 /* SBJsonUTF8Stream.m in Sources */,
 				E24FA33A15C1B1520096F345 /* SBJsonWriter.m in Sources */,
+				E2C9649115C2956500353525 /* FileListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

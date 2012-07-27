@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -38,11 +37,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <segue destination="dKI-CO-TxR" kind="modal" identifier="showListTable" id="8AL-T2-oAJ"/>
+                        <segue destination="b7p-Ix-93x" kind="modal" identifier="showListTable" modalTransitionStyle="crossDissolve" id="IUZ-gQ-n1I"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="364" y="301"/>
+            <point key="canvasLocation" x="862" y="296"/>
         </scene>
         <!--Notes List View Controller - PCS Notes-->
         <scene sceneID="Xn2-og-iGx">
@@ -50,11 +49,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glT-Py-esH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="dKI-CO-TxR" customClass="NotesListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FSJ-Zo-D0U">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" editingAccessoryType="checkmark" textLabel="yoX-AN-5gc" detailTextLabel="ifA-MA-hyI" style="IBUITableViewCellStyleValue1" id="KIL-H1-GOG">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" editingAccessoryType="checkmark" textLabel="yoX-AN-5gc" detailTextLabel="ifA-MA-hyI" style="IBUITableViewCellStyleValue1" id="KIL-H1-GOG" customClass="FileListCell">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -104,7 +103,7 @@
                     </navigationItem>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1331" y="296"/>
+            <point key="canvasLocation" x="1857" y="296"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="9rT-KX-snB">
@@ -112,11 +111,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5KH-A3-5BJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Si3-nh-TMc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FQl-o6-BEL">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="A4B-Df-6XO">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -129,38 +128,36 @@
                     <navigationItem key="navigationItem" id="aZu-hg-Ztw"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1740" y="301"/>
+            <point key="canvasLocation" x="2266" y="301"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="0Eo-34-LvP">
+        <scene sceneID="6jY-mb-59p">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ETY-I0-jI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="JQa-QM-LrI" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PH0-FY-4I4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="b7p-Ix-93x" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="KbF-HA-c2N">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="3US-eN-Oag">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" barStyle="blackTranslucent" id="U00-Vf-UUs">
-                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
                     <connections>
-                        <segue destination="dKI-CO-TxR" kind="relationship" relationship="rootViewController" id="by9-TM-vN3"/>
+                        <segue destination="dKI-CO-TxR" kind="relationship" relationship="rootViewController" id="Yla-e1-aZY"/>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="805" y="296"/>
+            <point key="canvasLocation" x="1331" y="296"/>
         </scene>
     </scenes>
     <resources>
         <image name="login_icon.png" width="480" height="464"/>
     </resources>
     <classes>
+        <class className="FileListCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FileListCell.h"/>
+        </class>
         <class className="NotesListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NotesListViewController.h"/>
             <relationships>
@@ -181,7 +178,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8AL-T2-oAJ"/>
         <segue reference="uSM-v5-IGE"/>
     </inferredMetricsTieBreakers>
 </document>
