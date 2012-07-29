@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12A269" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -48,13 +48,25 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glT-Py-esH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="dKI-CO-TxR" customClass="NotesListViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FSJ-Zo-D0U">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FSJ-Zo-D0U">
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="S4h-76-7bR">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                                <string>Title</string>
+                            </scopeButtonTitles>
+                            <connections>
+                                <outlet property="delegate" destination="dKI-CO-TxR" id="Nib-4H-WaA"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" editingAccessoryType="checkmark" textLabel="yoX-AN-5gc" detailTextLabel="ifA-MA-hyI" style="IBUITableViewCellStyleValue1" id="KIL-H1-GOG" customClass="FileListCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notesListCell" textLabel="yoX-AN-5gc" detailTextLabel="ifA-MA-hyI" style="IBUITableViewCellStyleValue1" id="KIL-H1-GOG">
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
@@ -68,17 +80,17 @@
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ifA-MA-hyI">
-                                            <rect key="frame" x="246" y="11" width="44" height="21"/>
+                                            <rect key="frame" x="259" y="16" width="31" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.051622570705211951" green="0.17742925855567171" blue="0.80100047831632648" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="Si3-nh-TMc" kind="push" id="uSM-v5-IGE"/>
+                                    <segue destination="Si3-nh-TMc" kind="push" identifier="showNote" id="xXa-Dd-0rq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -87,9 +99,20 @@
                             <outlet property="delegate" destination="dKI-CO-TxR" id="zF2-Mq-una"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Lo1-Fc-uRV"/>
+                        <barButtonItem style="plain" systemItem="refresh" id="cjx-tt-KbQ"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="UvG-5H-eKN"/>
+                        <barButtonItem style="plain" systemItem="organize" id="9gX-la-Ctj"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="HVW-o4-SbL"/>
+                        <barButtonItem style="plain" systemItem="search" id="bTB-Yg-HWn"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="rs8-hm-BBv"/>
+                        <barButtonItem style="plain" systemItem="rewind" id="qRL-Iv-mtt"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="IGZ-w3-Vvy"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="PCS Notes" id="dh3-wG-MII">
                         <barButtonItem key="backBarButtonItem" title="Notes" id="KpI-tn-Kij"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="3dS-Bg-yFh">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="3dS-Bg-yFh">
                             <connections>
                                 <action selector="refreshNotesList:" destination="dKI-CO-TxR" id="1Un-Pe-19Q"/>
                             </connections>
@@ -97,35 +120,59 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="oiw-tO-NkS">
                             <connections>
                                 <action selector="newNote:" destination="dKI-CO-TxR" id="3t4-vW-wNu"/>
-                                <segue destination="Si3-nh-TMc" kind="push" id="31x-DH-fDl"/>
+                                <segue destination="Si3-nh-TMc" kind="push" identifier="editNote" id="31x-DH-fDl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="pVn-fc-fO9" id="7Yq-wk-DHV"/>
+                    </connections>
                 </tableViewController>
+                <searchDisplayController id="pVn-fc-fO9">
+                    <connections>
+                        <outlet property="delegate" destination="dKI-CO-TxR" id="qDL-AY-kfo"/>
+                        <outlet property="searchBar" destination="S4h-76-7bR" id="Trg-fZ-cEg"/>
+                        <outlet property="searchContentsController" destination="dKI-CO-TxR" id="v7Q-b6-7aL"/>
+                        <outlet property="searchResultsDataSource" destination="dKI-CO-TxR" id="fHX-SK-XuJ"/>
+                        <outlet property="searchResultsDelegate" destination="dKI-CO-TxR" id="lFc-Fq-Ilg"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1857" y="296"/>
         </scene>
-        <!--View Controller-->
+        <!--Note Content View Controller-->
         <scene sceneID="9rT-KX-snB">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5KH-A3-5BJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Si3-nh-TMc" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Si3-nh-TMc" customClass="NoteContentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FQl-o6-BEL">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="A4B-Df-6XO">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="A4B-Df-6XO">
+                                <rect key="frame" x="0.0" y="43" width="320" height="373"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                             </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="UkH-wu-0Eh">
+                                <rect key="frame" x="20" y="14" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="aZu-hg-Ztw"/>
+                    <navigationItem key="navigationItem" id="aZu-hg-Ztw">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="d89-fj-dnL"/>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2266" y="301"/>
@@ -134,15 +181,20 @@
         <scene sceneID="6jY-mb-59p">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PH0-FY-4I4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="b7p-Ix-93x" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="b7p-Ix-93x" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="blackOpaque"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="3US-eN-Oag">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" barStyle="blackOpaque" id="Hgc-pb-2AT">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="dKI-CO-TxR" kind="relationship" relationship="rootViewController" id="Yla-e1-aZY"/>
                     </connections>
@@ -155,8 +207,11 @@
         <image name="login_icon.png" width="480" height="464"/>
     </resources>
     <classes>
-        <class className="FileListCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FileListCell.h"/>
+        <class className="NoteContentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NoteContentViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+            </relationships>
         </class>
         <class className="NotesListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NotesListViewController.h"/>
@@ -178,6 +233,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uSM-v5-IGE"/>
+        <segue reference="xXa-Dd-0rq"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,4 +10,7 @@
 
 @interface NoteContentViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic, assign) BOOL isEditMode;
+
 @end

@@ -3,7 +3,7 @@
 //  PCSNote
 //
 //  Created by Yongmo Liang on 7/24/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Baidu Inc. All rights reserved.
 //
 
 #import "NoteContentViewController.h"
@@ -13,6 +13,9 @@
 @end
 
 @implementation NoteContentViewController
+
+@synthesize timeLabel;
+@synthesize isEditMode;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +30,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if (isEditMode == YES) {
+        self.navigationItem.rightBarButtonItem.title = @"Save";
+    } else {
+        self.navigationItem.rightBarButtonItem.title = @"Edit";
+
+    }
+    
 }
 
 - (void)viewDidUnload

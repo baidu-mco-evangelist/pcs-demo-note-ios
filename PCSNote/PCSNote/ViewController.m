@@ -45,7 +45,6 @@ NSString *accessToken;
 // Successfully get token
 -(void)onComplete:(NSString*)token
 {
-    NSLog(@"Complete");
     accessToken = token;
     
     // Save access_token locally
@@ -58,7 +57,7 @@ NSString *accessToken;
     */
      
        
-    NSLog(@"perform segue");
+    //NSLog(@"perform segue");
     [self performSegueWithIdentifier: @"showListTable" sender: self];
 
     
@@ -85,7 +84,7 @@ NSString *accessToken;
 
 - (IBAction)loginToBaiduPcs:(id)sender
 {
-    NSLog(@"Login to Baidu");
+    //NSLog(@"Login to Baidu");
     [self.view addSubview:baiduOAuth.view];
     [baiduOAuth performBaiduOAuthWithApiKey:API_KEY];
 

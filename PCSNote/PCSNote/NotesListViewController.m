@@ -8,6 +8,7 @@
 
 #import "NotesListViewController.h"
 #import "SBJson.h"
+#import "NoteContentViewController.h"
 
 
 extern NSString *accessToken;
@@ -21,6 +22,21 @@ extern NSString *accessToken;
 @implementation NotesListViewController
 
 @synthesize fileListJson;
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"editNote"])
+    {
+        
+        [[segue destinationViewController] setIsEditMode:YES];
+    } else if ([[segue identifier] isEqualToString:@"showNote"]) {
+        
+        
+        [[segue destinationViewController] setIsEditMode:NO];
+    }
+}
 
 - (IBAction)refreshNotesList:(id)sender
 {
@@ -52,11 +68,9 @@ extern NSString *accessToken;
 
 - (void) getFileInfoList
 {
-    
-    NSLog(@"Access Token: %@", accessToken);
-    
+        
     NSString *baseUrl = @"https://pcs.baidu.com/rest/2.0/pcs/file?";
-    baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@&path=/apps/云端记事本", accessToken, @"list"];
+    baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@&path=/apps/云端记事本&by=%@", accessToken, @"list", @"time"];
     baseUrl = [baseUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     
@@ -71,14 +85,12 @@ extern NSString *accessToken;
     
     if ([data length] > 0 && error == nil)
     {
-        NSLog(@"Has Data");
         fileListJson = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         
     } else if ([data length] ==0 && error == nil) {
         NSLog(@"No Data");
     } else if  (error) {
-        NSLog(@"ends with error");
-        NSLog(@"%@", error);
+        NSLog(@"Error: %@", error.description);
     }
     
     //NSLog(@"%@", fileListJson);
@@ -112,21 +124,6 @@ extern NSString *accessToken;
     
 }
 
-- (void) viewWillAppear:(BOOL)animated
-{
-    [self getFileInfoList];
-    
-    
-    if ([fileList count]>0) {
-        for (NSDictionary *file in fileList) {
-            NSString *path = [file objectForKey:@"path"];
-            NSString *mtime = [file objectForKey:@"mtime"];
-            NSLog(@"%@ - %@", path, mtime);
-        }
-    } else {
-        NSLog(@" No File List");
-    }
-}
 
 - (void)viewDidLoad
 {
@@ -138,9 +135,21 @@ extern NSString *accessToken;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    // Get array based on fileListJson
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+
+    // Get file list from PCS
+    [self getFileInfoList];
     
     
+    if ([fileList count]>0) {
+        for (NSDictionary *file in fileList) {
+            NSString *path = [file objectForKey:@"path"];
+            NSInteger mtime = (NSInteger)[file objectForKey:@"mtime"];
+            NSLog(@"%@ - %d", path, mtime);
+        }
+    } else {
+        NSLog(@" No File List");
+    }
     
 
     //NSDictionary *fileArray = [parser objectWithString:fileInfoJson error:nil];
@@ -166,13 +175,11 @@ extern NSString *accessToken;
 
 #pragma mark - Table view data source
 
-/*
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
- */
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -183,32 +190,44 @@ extern NSString *accessToken;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    
+    static NSString *CellIdentifier = @"notesListCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     
-    NSLog(@"Configure the Cell");
+    //NSLog(@"Configure the Cell");
+    if (cell == nil)
+    { 
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
     
-    /*
+        
     NSDictionary *file = [fileList objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [file objectForKey:@"path"];
-    cell.detailTextLabel.text = [file objectForKey:@"mtime"];
-    */
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = [[[file objectForKey:@"path"] lastPathComponent] stringByDeletingPathExtension];
+    
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate *fileMDate = [NSDate dateWithTimeIntervalSinceNow:(NSInteger)[file objectForKey:@"ctime"]*1000];
+    //fileMDate = [NSDate dateWithTimeIntervalSinceReferenceDate:(NSInteger)[file objectForKey:@"mtime"]*1000];
+    
+    NSString *date = [fomatter stringFromDate:fileMDate];
+    
+    cell.detailTextLabel.text = date;
+    
     return cell;
 }
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -220,7 +239,6 @@ extern NSString *accessToken;
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
 /*
 // Override to support rearranging the table view.
