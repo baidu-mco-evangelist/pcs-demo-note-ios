@@ -17,4 +17,6 @@
 @property (nonatomic, assign) BOOL isEditMode;
 @property (nonatomic, strong) NSDictionary *detailFile;
 
+- (IBAction) navigationItemAction:(id)sender;
+
 @end

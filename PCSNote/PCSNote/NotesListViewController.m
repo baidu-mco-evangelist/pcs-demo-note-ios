@@ -37,6 +37,9 @@ extern NSString *accessToken;
         
         [[segue destinationViewController] setIsEditMode:NO];
         
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        detailFile = [fileList objectAtIndex:indexPath.row];
+
         if (detailFile) {
             [[segue destinationViewController] setDetailFile:detailFile];
         }
@@ -71,7 +74,7 @@ extern NSString *accessToken;
 }
 
 
-- (void) getFileInfoList
+- (void) getFileList
 {
         
     NSString *baseUrl = @"https://pcs.baidu.com/rest/2.0/pcs/file?";
@@ -127,6 +130,40 @@ extern NSString *accessToken;
     
 }
 
+- (void)downloadFiles
+{
+    NSString *baseUrl = @"https://pcs.baidu.com/rest/2.0/pcs/file?";
+    
+    if ([fileList count]>0) {
+        for (NSDictionary *file in fileList) {
+            baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@&path=%@", accessToken, @"download", [file objectForKey:@"path"]];
+            baseUrl = [baseUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            NSURL *url = [NSURL URLWithString:baseUrl];
+            
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+            [request setHTTPMethod:@"GET"];
+            
+            NSURLResponse *response = nil;
+            NSError *error = nil;
+            NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            if ([data length] > 0 && error == nil)
+            {
+                NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDirectory, YES) objectAtIndex:0] stringByAppendingPathComponent:[[file objectForKey:@"path"] lastPathComponent]];
+                [data writeToFile:filePath atomically:YES];
+                
+                NSLog(@"Downloading file: %@", [[file objectForKey:@"path"] lastPathComponent]);
+            } else if ([data length] ==0 && error == nil) {
+                NSLog(@"No Data");
+            } else if  (error) {
+                NSLog(@"Error: %@", error.description);
+            }
+        }
+    }
+    
+}
+
 
 - (void)viewDidLoad
 {
@@ -140,9 +177,11 @@ extern NSString *accessToken;
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    // Get file list from PCS
-    [self getFileInfoList];
+    // Get the file list from PCS
+    [self getFileList];
     
+    // Download files from PCS
+    [self downloadFiles];
     
     if ([fileList count]>0) {
         for (NSDictionary *file in fileList) {
@@ -269,7 +308,6 @@ extern NSString *accessToken;
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
     
-    detailFile = [fileList objectAtIndex:indexPath.row];
     
 }
 
