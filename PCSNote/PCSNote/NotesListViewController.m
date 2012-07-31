@@ -15,6 +15,7 @@ extern NSString *accessToken;
 
 @interface NotesListViewController () {
     NSArray *fileList;
+    NSDictionary *detailFile;
 }
 
 @end
@@ -35,6 +36,10 @@ extern NSString *accessToken;
         
         
         [[segue destinationViewController] setIsEditMode:NO];
+        
+        if (detailFile) {
+            [[segue destinationViewController] setDetailFile:detailFile];
+        }
     }
 }
 
@@ -92,9 +97,7 @@ extern NSString *accessToken;
     } else if  (error) {
         NSLog(@"Error: %@", error.description);
     }
-    
-    //NSLog(@"%@", fileListJson);
-    
+        
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSDictionary *fileListDict = [parser objectWithString:fileListJson error:nil];
     fileList = [fileListDict objectForKey:@"list"];
@@ -144,8 +147,8 @@ extern NSString *accessToken;
     if ([fileList count]>0) {
         for (NSDictionary *file in fileList) {
             NSString *path = [file objectForKey:@"path"];
-            NSInteger mtime = (NSInteger)[file objectForKey:@"mtime"];
-            NSLog(@"%@ - %d", path, mtime);
+            NSString* mtime = (NSString *)[file objectForKey:@"mtime"];
+            NSLog(@"%@ - %@", path, mtime);
         }
     } else {
         NSLog(@" No File List");
@@ -209,13 +212,11 @@ extern NSString *accessToken;
     cell.textLabel.text = [[[file objectForKey:@"path"] lastPathComponent] stringByDeletingPathExtension];
     
     NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
-    [fomatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [fomatter setDateFormat:@"MM-dd HH:mm"];
     
-    NSDate *fileMDate = [NSDate dateWithTimeIntervalSinceNow:(NSInteger)[file objectForKey:@"ctime"]*1000];
-    //fileMDate = [NSDate dateWithTimeIntervalSinceReferenceDate:(NSInteger)[file objectForKey:@"mtime"]*1000];
-    
+    NSDate *fileMDate = [NSDate dateWithTimeIntervalSince1970:[[file objectForKey:@"mtime"] intValue]];
+
     NSString *date = [fomatter stringFromDate:fileMDate];
-    
     cell.detailTextLabel.text = date;
     
     return cell;
@@ -267,6 +268,18 @@ extern NSString *accessToken;
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    detailFile = [fileList objectAtIndex:indexPath.row];
+    
 }
 
 @end
+
+
+
+
+
+
+
+
+

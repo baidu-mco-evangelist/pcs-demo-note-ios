@@ -8,7 +8,7 @@
 
 #import "NoteContentViewController.h"
 
-@interface NoteContentViewController ()
+@interface NoteContentViewController () 
 
 @end
 
@@ -16,6 +16,19 @@
 
 @synthesize timeLabel;
 @synthesize isEditMode;
+@synthesize textView;
+@synthesize detailFile;
+
+- (NSString *)getCurrentDateTime
+{
+    NSDate *tmpDate = [NSDate dateWithTimeIntervalSinceNow:0];
+    
+    NSDateFormatter *dataFormatter = [[NSDateFormatter alloc] init];
+    [dataFormatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    
+    NSString *dateString = [dataFormatter stringFromDate:tmpDate];
+    return dateString;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,11 +46,14 @@
     
     if (isEditMode == YES) {
         self.navigationItem.rightBarButtonItem.title = @"Save";
+        textView.text = @"";
+        [self.textView becomeFirstResponder];
+        [self.navigationItem setTitle:@"New Note"];
+        [self.timeLabel setText:[self getCurrentDateTime]];
     } else {
         self.navigationItem.rightBarButtonItem.title = @"Edit";
-
+        [self.textView setText:[detailFile objectForKey:@""]];
     }
-    
 }
 
 - (void)viewDidUnload

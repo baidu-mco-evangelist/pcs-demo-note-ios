@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NotesListViewController.h"
+
 
 @interface NoteContentViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic, strong) IBOutlet UITextView *textView;
 @property (nonatomic, assign) BOOL isEditMode;
+@property (nonatomic, strong) NSDictionary *detailFile;
 
 @end
