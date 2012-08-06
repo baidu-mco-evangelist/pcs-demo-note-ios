@@ -151,15 +151,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="A4B-Df-6XO">
-                                <rect key="frame" x="0.0" y="43" width="320" height="373"/>
+                                <rect key="frame" x="0.0" y="94" width="320" height="322"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.84400201612903236" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="UkH-wu-0Eh">
-                                <rect key="frame" x="20" y="14" width="280" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="UkH-wu-0Eh">
+                                <rect key="frame" x="20" y="65" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" id="kWp-fc-icm">
+                                <rect key="frame" x="70" y="26" width="230" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="00o-xO-lQE">
+                                <rect key="frame" x="20" y="26" width="50" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -179,6 +192,7 @@
                     <connections>
                         <outlet property="textView" destination="A4B-Df-6XO" id="byI-ml-yfG"/>
                         <outlet property="timeLabel" destination="UkH-wu-0Eh" id="oUf-D3-KFm"/>
+                        <outlet property="titleFiled" destination="kWp-fc-icm" id="eR6-MU-VwW"/>
                     </connections>
                 </viewController>
             </objects>
@@ -220,6 +234,7 @@
                 <relationship kind="action" name="navigationItemAction:"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleFiled" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="NotesListViewController" superclassName="UITableViewController">

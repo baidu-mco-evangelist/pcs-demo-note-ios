@@ -21,43 +21,54 @@ extern NSString *accessToken;
 
 @implementation NoteContentViewController
 
+@synthesize titleFiled;
 @synthesize timeLabel;
 @synthesize isEditMode;
 @synthesize textView;
 @synthesize detailFile;
 
+
 - (void) saveFileWithTitle:(NSString *)fileTitle Content:(NSString *) fileContent
 {
-    NSLog(@"%@", fileTitle); 
     NSString *finalFileName = [[[fileTitle stringByTrimmingCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingFormat:@"%@", @".txt"];
-    NSLog(@"%@", finalFileName);
     NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDirectory, YES) objectAtIndex:0] stringByAppendingPathComponent:finalFileName];
     NSLog(@"path: %@",filePath);
     [[fileContent dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:YES];
     
-    NSLog(@"at: %@", accessToken);
-    NSString *baseUrl = @"https://pcs.baidu.com/rest/2.0/pcs/file?";
-    baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@&path=/apps/云端记事本", accessToken, @"upload"];
-    baseUrl = [baseUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    if ([fileManager fileExistsAtPath:filePath]) {
+        NSLog(@"File Exists!!!!");
+    }
     
+    NSString *baseUrl = @"https://pcs.baidu.com/rest/2.0/pcs/file?";
+    baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@&path=/apps/云端记事本/%@",
+               accessToken, @"upload", finalFileName];
+    baseUrl = [baseUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"Upload Request: %@", baseUrl);
     
     NSURL *url = [NSURL URLWithString:baseUrl];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[fileContent dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSString *params = [[NSString alloc] initWithFormat:@"&file=%@", filePath];
+    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSHTTPURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
+    NSLog(@"Response Data: %@", data);
+    NSLog(@"HTTP Response Status: %d", [response statusCode]);
+
+    
     if ([data length] > 0 && error == nil)
     {
-        NSLog(@"%d", [response statusCode]);
+        
     } else if ([data length] ==0 && error == nil) {
         NSLog(@"No Data");
     } else if  (error) {
-        NSLog(@"Error: %@", error.description);
+        NSLog(@"Error Code: %d", error.code);
     }
 }
 
@@ -65,13 +76,8 @@ extern NSString *accessToken;
 {
     if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"Save"]) {
         // Save a note
-        NSString *title = [[[self.textView text] componentsSeparatedByString:@"\n"] objectAtIndex:0];
-        if (title.length > 30) {
-            title = [title substringToIndex:30];
-        }
-        NSLog(@"%@", title);
         
-        [self saveFileWithTitle:title Content:self.textView.text];
+        [self saveFileWithTitle:titleFiled.text Content:self.textView.text];
         [self.navigationController popViewControllerAnimated:YES];
         
     } else {
@@ -109,8 +115,9 @@ extern NSString *accessToken;
     
     if (isEditMode == YES) {
         self.navigationItem.rightBarButtonItem.title = @"Save";
+        titleFiled.text = @"";
         textView.text = @"";
-        [self.textView becomeFirstResponder];
+        [self.titleFiled becomeFirstResponder];
         [self.navigationItem setTitle:@"New Note"];
         [self.timeLabel setText:[self getCurrentDateTime]];
     } else {

@@ -12,6 +12,7 @@
 
 @interface NoteContentViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UITextField *titleFiled;
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) IBOutlet UITextView *textView;
 @property (nonatomic, assign) BOOL isEditMode;
