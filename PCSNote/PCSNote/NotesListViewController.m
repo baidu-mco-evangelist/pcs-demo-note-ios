@@ -14,7 +14,7 @@
 extern NSString *accessToken;
 
 @interface NotesListViewController () {
-    NSArray *fileList;
+    NSMutableArray *fileList;
     NSDictionary *detailFile;
 }
 
@@ -164,6 +164,30 @@ extern NSString *accessToken;
     
 }
 
+- (void)deleteFile:(NSString *) fileName
+{
+    NSString *baseUrl = @"https://pcs.baidu.com/rest/2.0/pcs/file?";
+    
+    baseUrl = [baseUrl stringByAppendingFormat:@"access_token=%@&method=%@&path=/apps/云端记事本/%@", accessToken, @"delete", fileName];
+    baseUrl = [baseUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURL *url = [NSURL URLWithString:baseUrl];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSHTTPURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (data && error == nil) {
+        NSLog(@"HTTP Request Status: %d", [response statusCode]);
+    } else if  (error) {
+        NSLog(@"Error: %@", error.description);
+    }
+    
+}
+
 
 - (void)viewDidLoad
 {
@@ -272,8 +296,28 @@ extern NSString *accessToken;
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        // delete local file
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
+        NSDictionary *file = [fileList objectAtIndex:indexPath.row];
+        NSString *fileName = [[file objectForKey:@"path"] lastPathComponent];
+        
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDirectory, YES) objectAtIndex:0] stringByAppendingPathComponent:fileName];
+        
+        if ([fileManager fileExistsAtPath:filePath]) {
+            [fileManager removeItemAtPath:filePath error:nil];
+        }
+        
+        // delete cloud file
+        [self deleteFile:fileName];
+        
+        // delete from file list
+        [fileList removeObjectAtIndex:indexPath.row];
+        
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
