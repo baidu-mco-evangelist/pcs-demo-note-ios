@@ -178,6 +178,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Hello World" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NQD-Hz-N6E">
+                                <rect key="frame" x="70" y="26" width="230" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -193,6 +200,7 @@
                         <outlet property="textView" destination="A4B-Df-6XO" id="byI-ml-yfG"/>
                         <outlet property="timeLabel" destination="UkH-wu-0Eh" id="oUf-D3-KFm"/>
                         <outlet property="titleFiled" destination="kWp-fc-icm" id="eR6-MU-VwW"/>
+                        <outlet property="titleLable" destination="NQD-Hz-N6E" id="XUv-Kg-7tv"/>
                     </connections>
                 </viewController>
             </objects>
@@ -235,6 +243,7 @@
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleFiled" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="titleLable" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="NotesListViewController" superclassName="UITableViewController">

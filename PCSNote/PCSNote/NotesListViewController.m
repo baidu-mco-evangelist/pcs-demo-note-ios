@@ -153,7 +153,7 @@ extern NSString *accessToken;
                 NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDirectory, YES) objectAtIndex:0] stringByAppendingPathComponent:[[file objectForKey:@"path"] lastPathComponent]];
                 [data writeToFile:filePath atomically:YES];
                 
-                NSLog(@"Downloading file: %@", [[file objectForKey:@"path"] lastPathComponent]);
+                //NSLog(@"Downloading file: %@", [[file objectForKey:@"path"] lastPathComponent]);
             } else if ([data length] ==0 && error == nil) {
                 NSLog(@"No Data");
             } else if  (error) {
@@ -201,6 +201,7 @@ extern NSString *accessToken;
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
+    /*
     // Get the file list from PCS
     [self getFileList];
     
@@ -216,7 +217,7 @@ extern NSString *accessToken;
     } else {
         NSLog(@" No File List");
     }
-    
+    */
 
     //NSDictionary *fileArray = [parser objectWithString:fileInfoJson error:nil];
     //NSLog(@"%@", fileArray);
@@ -225,6 +226,17 @@ extern NSString *accessToken;
         NSLog(@"Hello World");
     }
     */
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"View Will Appear!!!");
+    // Get the file list from PCS
+    [self getFileList];
+    
+    // Download files from PCS
+    [self downloadFiles];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload
